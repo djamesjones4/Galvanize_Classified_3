@@ -1,0 +1,80 @@
+<main class="container">
+  <div class="">
+    <p><a class="btn btn-info" data-toggle="collapse" data-target="#myForm" >Create Ad</a></p>
+  </div>
+
+  <div class="row collapse" id="myForm">
+    <div class="col-md-8">
+      <form novalidate name = "commentForm" ng-submit = "$ctrl.postAdded()">
+        <div class="form-group" ng-class="{'has-error': $ctrl.commentForm.title.$invalid}">
+          <label for="title">Title</label>
+          <input id="title" class="form-control" required name = "title" ng-model="$ctrl.ad.title" minlength = "2">
+          <span ng-show="$ctrl.commentForm.title.$invalid">Please enter a title</span>
+          <span ng-show="$ctrl.commentForm.title.$error.minlength">Title needs to be at least 3 characters</span>
+        </div>
+        <div class="form-group">
+          <label for="body">Description</label>
+          <textarea id="body" class="form-control" ng-model="$ctrl.ad.description" name = "body" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="body">Price</label>
+          <input type="text" id="body" class="form-control" ng-model="$ctrl.ad.price" name = "body" required>
+        </div>
+
+        <div class="form-group">
+          <label for="image-url">Image URL</label>
+          <input id="image-url" class="form-control" ng-model="$ctrl.ad.item_image" name="image" required>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">
+            Create Post
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+<div class="" ng-repeat="ad in $ctrl.ads">
+  <h4>{{ad.title}}</h4>
+  <span>${{ad.price}}</span>
+  <p>{{ad.description}}</p>
+  <img ng-src="{{ad.item_image}}" alt="">
+  <button ng-click="$ctrl.deleteAd({id: ad.id})" class="btn">delete</button>
+  <button class="btn" ng-click="$ctrl.toggle(ad, $index)">edit</button>
+
+  <div ng-if="ad[$index]" >
+    <div class="col-md-8">
+      <form novalidate name = "commentForm" ng-submit="$ctrl.editPost(ad)">
+        <div class="form-group" >
+          <label for="title">Title</label>
+          <input id="title" class="form-control" required name = "title" ng-model="$ctrl.editForm.title" minlength = "2">
+        </div>
+        <div class="form-group">
+          <label for="body">Description</label>
+          <textarea id="body" class="form-control" ng-model="$ctrl.editForm.description" name = "body" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="body">Price</label>
+          <input type="text" id="body" class="form-control" ng-model="$ctrl.editForm.price" name = "body" required>
+        </div>
+
+        <div class="form-group">
+          <label for="image-url">Image URL</label>
+          <input id="image-url" class="form-control" ng-model="$ctrl.editForm.item_image" name="image" required>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">
+            Update
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+</div>
+
+
+</main>
