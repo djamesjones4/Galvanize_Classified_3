@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "heroku-postbuild": "knex migrate:rollback; knex migrate:latest; knex seed:run;",
-    "start": "nodemon server.js",
+    "start": "node server/server.js",
     "test": "mocha"
   },
   "keywords": [],
