@@ -11,7 +11,7 @@ app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, 'client')))
 app.use(express.static(path.join(__dirname, '/../', 'node_modules')))
 
-const ads = require('./server/routes/classifieds')
+const ads = require('./routes/classifieds')
 app.use('/api/classifieds', ads)
 
 app.use('*', function(req, res, next) {
