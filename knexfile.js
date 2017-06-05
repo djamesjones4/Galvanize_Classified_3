@@ -9,6 +9,9 @@ module.exports = {
   test: {client: 'pg',
   connection: 'postgres://localhost/galvanize_classified_test'
   },
-  production: { },
+  production: {
+    client: 'pg',
+    connection: 'postgres://localhost/galvanize_classified_dev'
+  }
 
-};
+}
