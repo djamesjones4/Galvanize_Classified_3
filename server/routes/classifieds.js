@@ -8,7 +8,7 @@ const pg = require('pg')
 // YOUR CODE HERE
 router.get('/', function(req, res, next) {
   knex('classifieds')
-  .select('id', 'title', 'description', 'price', 'item_image')
+  .select('id', 'title', 'description', 'price', 'item_image', 'created_at')
   .then((classifieds) => {
     res.send(classifieds)
   })
@@ -19,7 +19,7 @@ router.get('/:id', (req, res, next) => {
 
   knex('classifieds')
   .where('id', id)
-  .select('id', 'title', 'description', 'price', 'item_image')
+  .select('id', 'title', 'description', 'price', 'item_image', 'created_at')
   .then((message) => {
     res.send(message[0])
   })
@@ -38,7 +38,7 @@ router.post('/', (req, res, next) => {
 
 router.patch('/:id', (req, res, next) => {
   let update = req.body
-  console.log('req.body= ', update);
+  console.log('req.body= ', update)
   let id = req.params.id
 
   knex('classifieds')
@@ -52,7 +52,7 @@ router.patch('/:id', (req, res, next) => {
 
 router.delete('/:id', (req, res, next) => {
   let id = req.params.id
-console.log('reqparams= ', req.params.id);
+  console.log('reqparams= ', req.params.id)
   knex('classifieds')
   .where('id', id)
   .returning(['id', 'title', 'description', 'price', 'item_image'])

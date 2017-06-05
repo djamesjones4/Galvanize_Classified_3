@@ -9,12 +9,10 @@
   AdsController.$inject = ['AdsService', 'NewAdFormService']
   function AdsController(AdsService) {
     const vm = this
-    vm.navigate = function(e) {
-      e.preventDefault()
-      $state.go('newAd')
-    }
-    vm.ad = []
+
+    vm.ad = {}
     vm.ads = []
+
     vm.$onInit = function() {
       AdsService.getAd().then(function(data) {
         vm.ads = data
@@ -27,6 +25,7 @@
         console.log('adding post')
         AdsService.getAd().then(function(data) {
           vm.ads = data
+          delete vm.ad
         })
       })
     }
@@ -55,6 +54,20 @@
           vm.ads = data
         })
       })
+    }
+
+    vm.filtering = ""
+    vm.filterPosts = function() {
+      switch (vm.filtering) {
+        case 'price':
+          vm.sorted = 'price'
+          break
+        case 'date':
+          vm.sorted = 'created_at'
+          break
+        default:
+          vm.sorted = "price"
+      }
     }
   }
 })()

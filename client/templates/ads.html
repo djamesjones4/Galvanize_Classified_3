@@ -1,7 +1,25 @@
 <main class="container">
-  <div class="">
+<nav class="navbar">
+  <div class="pull-right">
     <p><a class="btn btn-info" data-toggle="collapse" data-target="#myForm" >Create Ad</a></p>
   </div>
+  <ul class="nav nav-pills">
+    <li role="presentation" class="active">
+      <input ng-model="filterSearch" type="search" class="form-control input-sm search-form" placeholder="Filter">
+    </li>
+    <div class="form-inline">
+      <label for="sort">  Sort by </label>
+      <select ng-model="$ctrl.filtering" ng-change="$ctrl.filterPosts()" class="form-control" id="sort">
+        <option>Price</option>
+        <option>Date Added</option>
+      </select>
+    </div>
+  </ul>
+</nav>
+
+  <!-- <div class="">
+    <p><a class="btn btn-info" data-toggle="collapse" data-target="#myForm" >Create Ad</a></p>
+  </div> -->
 
   <div class="row collapse" id="myForm">
     <div class="col-md-8">
@@ -9,8 +27,7 @@
         <div class="form-group" ng-class="{'has-error': $ctrl.commentForm.title.$invalid}">
           <label for="title">Title</label>
           <input id="title" class="form-control" required name = "title" ng-model="$ctrl.ad.title" minlength = "2">
-          <span ng-show="$ctrl.commentForm.title.$invalid">Please enter a title</span>
-          <span ng-show="$ctrl.commentForm.title.$error.minlength">Title needs to be at least 3 characters</span>
+
         </div>
         <div class="form-group">
           <label for="body">Description</label>
@@ -27,7 +44,7 @@
           <input id="image-url" class="form-control" ng-model="$ctrl.ad.item_image" name="image" required>
         </div>
         <div class="form-group">
-          <button type="submit" class="btn btn-primary">
+          <button type="submit" class="btn btn-primary" data-toggle="collapse" data-target="#myForm">
             Create Post
           </button>
         </div>
@@ -35,11 +52,12 @@
     </div>
   </div>
 
-<div class="" ng-repeat="ad in $ctrl.ads">
+<div class="" ng-repeat="ad in $ctrl.ads | orderBy:$ctrl.sorted | filter: filterSearch">
   <h4>{{ad.title}}</h4>
   <span>${{ad.price}}</span>
   <p>{{ad.description}}</p>
   <img ng-src="{{ad.item_image}}" alt="">
+  <p>date added: {{ad.created_at}}</p>
   <button ng-click="$ctrl.deleteAd({id: ad.id})" class="btn">delete</button>
   <button class="btn" ng-click="$ctrl.toggle(ad, $index)">edit</button>
 

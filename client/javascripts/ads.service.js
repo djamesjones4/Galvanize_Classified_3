@@ -10,7 +10,7 @@
           })
         },
         addPost: function(newAd) {
-          console.log('adsService');
+          console.log('slskjdflj', newAd)
           return $http.post('/api/classifieds', newAd)
           .then(function(postData) {
             console.log('postData= ', postData.data)
