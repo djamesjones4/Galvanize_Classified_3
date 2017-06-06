@@ -6,12 +6,12 @@ module.exports = {
     client: 'pg',
     connection: 'postgres://localhost/galvanize_classified_dev'
   },
-  test: {client: 'pg',
+  test: { client: 'pg',
   connection: 'postgres://localhost/galvanize_classified_test'
   },
   production: {
     client: 'pg',
-    connection: 'postgres://localhost/galvanize_classified_dev'
+    connection: process.env.DATABASE_URL
   }
 
 }
